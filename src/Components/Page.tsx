@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Context, Mycontext } from "./Context";
+import { Context } from "./Context";
 
 interface Phonetic {
   audio: string;
@@ -92,7 +92,7 @@ function Page() {
             onChange={(e) => setWord(e.target.value)}
             type="text"
             placeholder="keyboard"
-            className="bg-transparent outline-none text-[16px] text-[#2D2D2D] font-bold "
+            className={`bg-transparent outline-none text-[16px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} font-bold `}
           />
           <img
             onClick={() => Search()}
@@ -104,7 +104,7 @@ function Page() {
         <section>
           <div className=" w-[100%] flex justify-between items-center ">
             <div className="h-[100%] flex flex-col justify-between ">
-              <h1 className="text-[32px] text-[#2D2D2D] font-bold ">
+              <h1 className={`text-[32px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} font-bold `}>
                 {data?.word}
               </h1>
               <h2 className="text-[18px] text-[#A445ED] ">
@@ -126,10 +126,10 @@ function Page() {
                 <>
                   <div className="mt-[32px]">
                     <div className="w-[100%] flex items-center">
-                      <p className="text-[18px] text-[#2D2D2D] font-bold mr-[16px]">
+                      <p className={`text-[18px]  ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"}  font-bold mr-[16px]`}>
                         {items.partOfSpeech}
                       </p>
-                      <hr className=" w-[100%] border border-solid border-[#E9E9E9] " />
+                      <hr className={` w-[100%] border border-solid ${context?.theme?"border-[#E9E9E9]":"border-[#3A3A3A]"} `} />
                     </div>
                     <p className="text-[16px] text-[#757575] mt-[32px] ">
                       Meaning
@@ -139,7 +139,7 @@ function Page() {
                         return (
                           <>
                             <li className="mt-[13px]">
-                              <p className="text-[15px] text-[#2D2D2D] ">
+                              <p className={`text-[15px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} `}>
                                 {items2.definition}
                               </p>
                             </li>
@@ -210,18 +210,18 @@ function Page() {
             })}
           </div>
           
-          <hr className=" w-[100%] border border-solid border-[#E9E9E9] mt-[32px] mb-[24px] " />
+          <hr  className={` w-[100%] border border-solid ${context?.theme?"border-[#E9E9E9]":"border-[#3A3A3A]"} mb-[24px] mt-[32px] `} />
           <div>
             <p className="text-[14px] text-[#757575] underline underline-offset-4 ">
               Source
             </p>
-            <div className="flex flex-col mt-[8px] mb-[80px] ">
+            <div className="flex flex-col mt-[8px] ">
               
                   {data?.sourceUrls.map((items:string)=> {
                     return(
                       <>
                       <a className="flex mt-[5px] " href={items}>
-                        <p className="text-[14px] text-[#2D2D2D] mr-[9px] underline underline-offset-2 ">{items}</p>
+                        <p className={`text-[14px] ${ context?.theme? "text-[#2D2D2D]":"text-[#FFF]"} mr-[9px] underline underline-offset-2 `}>{items}</p>
                         <img src="/assets/images/icon-new-window.svg" alt="link" />
                       </a>
                       </>
