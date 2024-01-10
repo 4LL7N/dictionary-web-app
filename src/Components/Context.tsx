@@ -5,7 +5,9 @@ interface ContextInt{
     font:string
     setFont:(font:string) => void
     fontMenu:boolean,
-    setFontMenu:(fontMenu:boolean) =>  void
+    setFontMenu:(fontMenu:boolean) =>  void,
+    theme:boolean,
+    setTheme:(theme:boolean) => void
 }
 
 export const Mycontext = createContext<ContextInt|null>(null)

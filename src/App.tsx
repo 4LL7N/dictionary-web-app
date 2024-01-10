@@ -6,18 +6,20 @@ import Page from "./Components/Page"
 function App() {
 
   const [font, setFont] = useState<string>("Sans Serif")
-  const [fontMenu, setFontMenu] = useState(false)
-
-
+  const [fontMenu, setFontMenu] = useState<boolean>(false)
+  const [theme, setTheme] = useState<boolean>(true)
+ console.log(theme)
   return (
     <>
       <Mycontext.Provider value={{
         font,
         setFont,
         fontMenu,
-        setFontMenu
+        setFontMenu,
+        theme,
+        setTheme
       }} >
-      <div className={` w-[100vw] px-[24px] pt-[24px] bg-[#FFF] `} >
+      <div className={` w-[100vw] min-h-[100vh] px-[24px] pt-[24px] ${theme?"bg-[#FFF]":"bg-[#050505]"} `} >
           <Head/>
           <Page/>
       </div>

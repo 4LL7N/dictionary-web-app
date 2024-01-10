@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Context, Mycontext } from "./Context";
 
 interface Phonetic {
   audio: string;
@@ -35,9 +36,19 @@ interface WordData {
   sourceUrls: string[];
 }
 
+interface ErrorMessage {
+  message: string;
+  resolution: string;
+  title: string;
+}
+
+
 function Page() {
+  const context = Context()
   const [word, setWord] = useState<string>("");
   const [data, setData] = useState<WordData | undefined>();
+  const [notFound, setNotFound] = useState<ErrorMessage| undefined>()
+  const foundPage = useRef<boolean>(false)
   const phonetic = useRef<number>(0);
   const audio = useRef<any>();
   const API = async () => {
@@ -46,8 +57,14 @@ function Page() {
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
       );
       const dataInfo = await response.json();
-
-      setData(dataInfo[0]);
+      console.log(dataInfo)
+        if (response.ok){
+          setData(dataInfo[0]);
+        }else{
+          setNotFound(dataInfo)
+          setData(undefined)
+          foundPage.current = true
+        }
     } catch {
       console.log("error");
     }
@@ -70,7 +87,7 @@ function Page() {
   return (
     <>
       <div className="w-[100%]">
-        <div className=" w-[100%] h-[48px] px-[24px] items-center  flex justify-between text-[18px] rounded-[16px] bg-[#F4F4F4] mb-[24px] ">
+        <div className={` w-[100%] h-[48px] px-[24px] items-center  flex justify-between text-[18px] rounded-[16px] ${context?.theme?"bg-[#F4F4F4]":"bg-[#1F1F1F]"} mb-[24px] `}>
           <input
             onChange={(e) => setWord(e.target.value)}
             type="text"
@@ -83,7 +100,7 @@ function Page() {
             alt="search"
           />
         </div>
-        {data?(<>
+        {data ?(<>
         <section>
           <div className=" w-[100%] flex justify-between items-center ">
             <div className="h-[100%] flex flex-col justify-between ">
@@ -91,7 +108,7 @@ function Page() {
                 {data?.word}
               </h1>
               <h2 className="text-[18px] text-[#A445ED] ">
-                {data?.phonetics[phonetic.current].text}
+                {data?.phonetics[phonetic.current]?.text}
               </h2>
             </div>
             <img
@@ -100,7 +117,7 @@ function Page() {
               src="/assets/images/icon-play.svg"
               alt="audio"
             />
-            <audio ref={audio} src={data?.phonetics[phonetic.current].audio} />
+            <audio ref={audio} src={data?.phonetics[phonetic.current]?.audio} />
           </div>
           <div>
             {data?.meanings.map((items: Meaning) => {
@@ -198,16 +215,33 @@ function Page() {
             <p className="text-[14px] text-[#757575] underline underline-offset-4 ">
               Source
             </p>
-            <div className="flex mt-[8px] mb-[85px] ">
-              <a className="flex" href={data?.sourceUrls[0]}>
-                <p className="text-[14px] text-[#2D2D2D] mr-[9px] underline underline-offset-2 ">
-                  {data?.sourceUrls}
-                </p>
-                <img src="/assets/images/icon-new-window.svg" alt="link" />
-              </a>
+            <div className="flex flex-col mt-[8px] mb-[80px] ">
+              
+                  {data?.sourceUrls.map((items:string)=> {
+                    return(
+                      <>
+                      <a className="flex mt-[5px] " href={items}>
+                        <p className="text-[14px] text-[#2D2D2D] mr-[9px] underline underline-offset-2 ">{items}</p>
+                        <img src="/assets/images/icon-new-window.svg" alt="link" />
+                      </a>
+                      </>
+                    )
+                  })}
+                
             </div>
           </div>
-        </section></>):null}
+        </section></>):
+          foundPage.current?
+            
+            <section className="flex flex-col items-center w-[100%] h-[100vh]  " >
+                <h1 className="text-[64px] mt-[70px] " >😕</h1>
+                <h2 className="text-[20px] text-[#2D2D2D] font-bold mt-[44px] " >{notFound?.title}</h2>
+                <h3 className="text-[18px] text-[#757575] text-center mt-[24px] " >{notFound?.message}.{notFound?.resolution}</h3>
+            </section>
+            :
+            null
+          
+        }
       </div>
     </>
   );
