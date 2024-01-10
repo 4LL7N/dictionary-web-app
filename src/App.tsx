@@ -20,7 +20,7 @@ function App() {
         theme,
         setTheme
       }} >
-      <div className={` w-[100vw] min-h-[100vh] px-[24px] pt-[24px]  pb-[80px] ${theme?"bg-[#FFF]":"bg-[#050505]"} `} >
+      <div className={` w-[100vw] min-h-[100vh] px-[24px] pt-[24px]  pb-[80px] md:px-[39px] md:pt-[58px] md:pb-[118px] lg:px-[352px] lg:pb-[124px] ${theme?"bg-[#FFF]":"bg-[#050505]"} `} >
           <Head/>
           <Page/>
           <FontMenu/>
