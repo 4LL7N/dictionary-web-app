@@ -89,6 +89,7 @@ function Page() {
       <div className="w-[100%]">
         <div className={` w-[100%] h-[48px] px-[24px] items-center  flex justify-between text-[18px] rounded-[16px] ${context?.theme?"bg-[#F4F4F4]":"bg-[#1F1F1F]"} mb-[24px] `}>
           <input
+          style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}}
             onChange={(e) => setWord(e.target.value)}
             type="text"
             placeholder="keyboard"
@@ -104,10 +105,10 @@ function Page() {
         <section>
           <div className=" w-[100%] flex justify-between items-center ">
             <div className="h-[100%] flex flex-col justify-between ">
-              <h1 className={`text-[32px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} font-bold `}>
+              <h1 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className={`text-[32px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} font-bold `}>
                 {data?.word}
               </h1>
-              <h2 className="text-[18px] text-[#A445ED] ">
+              <h2 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[18px] text-[#A445ED] ">
                 {data?.phonetics[phonetic.current]?.text}
               </h2>
             </div>
@@ -126,12 +127,12 @@ function Page() {
                 <>
                   <div className="mt-[32px]">
                     <div className="w-[100%] flex items-center">
-                      <p className={`text-[18px]  ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"}  font-bold mr-[16px]`}>
+                      <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className={`text-[18px]  ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"}  font-bold mr-[16px]`}>
                         {items.partOfSpeech}
                       </p>
                       <hr className={` w-[100%] border border-solid ${context?.theme?"border-[#E9E9E9]":"border-[#3A3A3A]"} `} />
                     </div>
-                    <p className="text-[16px] text-[#757575] mt-[32px] ">
+                    <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[16px] text-[#757575] mt-[32px] ">
                       Meaning
                     </p>
                     <ul className="mt-[17px] px-[24px] list-disc text-[#8F19E8]  ">
@@ -139,12 +140,12 @@ function Page() {
                         return (
                           <>
                             <li className="mt-[13px]">
-                              <p className={`text-[15px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} `}>
+                              <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className={`text-[15px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} `}>
                                 {items2.definition}
                               </p>
                             </li>
                             {items2.example ? (
-                              <p className="text-[15px] mt-[13px] text-[#757575] ">
+                              <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[15px] mt-[13px] text-[#757575] ">
                                 "{items2.example}"
                               </p>
                             ) : null}
@@ -154,7 +155,7 @@ function Page() {
                     </ul>
                     {items.synonyms.length > 0 ? (
                       <div className="flex mt-[24px] gap-[20px] ">
-                        <h3 className="text-[16px] text-[#757575] ">
+                        <h3 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[16px] text-[#757575] ">
                           Synonyms :
                         </h3>
                         <div className="flex flex-col">
@@ -162,7 +163,7 @@ function Page() {
                             (items3: string, index: number) => {
                               return (
                                 <>
-                                  <p
+                                  <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}}
                                     className={`text-[16px] text-[#A445ED] font-bold ${
                                       index == items.synonyms.length
                                         ? ""
@@ -180,7 +181,7 @@ function Page() {
                     ) : null}
                     {items.antonyms.length > 0 ? (
                       <div className="flex mt-[24px] gap-[20px]  ">
-                        <h3 className="text-[16px] text-[#757575] ">
+                        <h3 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[16px] text-[#757575] ">
                           Antonyms :
                         </h3>
                         <div className="flex flex-col">
@@ -188,7 +189,7 @@ function Page() {
                             (items4: string, index: number) => {
                               return (
                                 <>
-                                  <p
+                                  <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}}
                                     className={`text-[16px] text-[#A445ED] font-bold ${
                                       index == items.antonyms.length
                                         ? ""
@@ -212,7 +213,7 @@ function Page() {
           
           <hr  className={` w-[100%] border border-solid ${context?.theme?"border-[#E9E9E9]":"border-[#3A3A3A]"} mb-[24px] mt-[32px] `} />
           <div>
-            <p className="text-[14px] text-[#757575] underline underline-offset-4 ">
+            <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[14px] text-[#757575] underline underline-offset-4 ">
               Source
             </p>
             <div className="flex flex-col mt-[8px] ">
@@ -221,7 +222,7 @@ function Page() {
                     return(
                       <>
                       <a className="flex mt-[5px] " href={items}>
-                        <p className={`text-[14px] ${ context?.theme? "text-[#2D2D2D]":"text-[#FFF]"} mr-[9px] underline underline-offset-2 `}>{items}</p>
+                        <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className={`text-[14px] ${ context?.theme? "text-[#2D2D2D]":"text-[#FFF]"} mr-[9px] underline underline-offset-2 `}>{items}</p>
                         <img src="/assets/images/icon-new-window.svg" alt="link" />
                       </a>
                       </>
@@ -234,9 +235,9 @@ function Page() {
           foundPage.current?
             
             <section className="flex flex-col items-center w-[100%] h-[100vh]  " >
-                <h1 className="text-[64px] mt-[70px] " >😕</h1>
-                <h2 className="text-[20px] text-[#2D2D2D] font-bold mt-[44px] " >{notFound?.title}</h2>
-                <h3 className="text-[18px] text-[#757575] text-center mt-[24px] " >{notFound?.message}.{notFound?.resolution}</h3>
+                <h1 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[64px] mt-[70px] " >😕</h1>
+                <h2 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[20px] text-[#2D2D2D] font-bold mt-[44px] " >{notFound?.title}</h2>
+                <h3 style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className="text-[18px] text-[#757575] text-center mt-[24px] " >{notFound?.message}.{notFound?.resolution}</h3>
             </section>
             :
             null

@@ -13,8 +13,10 @@ function Head(){
                 <option className="text-[14px] text-[#2D2D2D] " value="Serif">Serif</option>
                 <option className="text-[14px] text-[#2D2D2D] " value="Mono">Mono</option>
               </select> */}
-              <p className={` text-[14px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} font-bold `} >{context?.font}</p>
+              <div className=" flex gap-[16px] "  onClick={() => context?.setFontMenu(!context.fontMenu) } >
+              <p style={context?.font == "Sans Serif"?{fontFamily:"inter"}:context?.font == "Serif"?{fontFamily:"lora"}:{fontFamily:"inconsolata"}} className={` text-[] text-[14px] ${context?.theme?"text-[#2D2D2D]":"text-[#FFF]"} font-bold `} >{context?.font}</p>
               <img src="/assets/images/icon-arrow-down.svg" alt="arrow" />
+              </div>
               </div>
               <div className= {` w-[1px] h-[100%] bg-[#E9E9E9] `} />
               <div className="flex justify-between items-center gap-[16px]  " >
